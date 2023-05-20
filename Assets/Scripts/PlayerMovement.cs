@@ -4,23 +4,32 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float horizontal;
+    public float horizontal;
     private float speed = 8f;
     private float jumpingPower = 16f;
-    private bool isFacingRight = true;
+    public bool isFacingRight = true;
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
+    public Animator animator;
+
+    [SerializeField] public Rigidbody2D rb;
+    [SerializeField] public Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+
+    public bool isJumping = false;
 
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
+        animator.SetFloat("Running", Mathf.Abs(horizontal));
+
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
+            animator.SetBool("isJumping", true);
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
+        else if (IsGrounded())
+            animator.SetBool("isJumping", false);
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
@@ -40,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
-    private void Flip()
+    public void Flip()
     {
         if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
