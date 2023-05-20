@@ -50,13 +50,13 @@ public class RopeInteraction : MonoBehaviour
                 rb.AddRelativeForce(new Vector3(1, 0, 0) * pushForce);
         }
 
-        /*
+        
         if(Input.GetKeyDown("w") || Input.GetKey("up") && attached)
             Slide(1);
         
         if(Input.GetKeyDown("s") || Input.GetKey("down") && attached)
             Slide(-1);
-        */
+        
         
         if(Input.GetKeyDown(KeyCode.Space) && attached)
             Detach();

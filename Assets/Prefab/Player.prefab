@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontal: 0
   isFacingRight: 1
+  animator: {fileID: 8234922913970280969}
   rb: {fileID: 6632617393618019455}
   groundCheck: {fileID: 6632617392698140818}
   groundLayer:
@@ -237,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6632617393618019455}
-  pushForce: 10
+  pushForce: 5
   attached: 0
   attachedTo: {fileID: 0}
   pulleySelected: {fileID: 0}
