@@ -51,14 +51,14 @@ public class RopeInteraction : MonoBehaviour
         }
 
         
-        if(Input.GetKeyDown("w") || Input.GetKey("up") && attached)
+        if(attached && (Input.GetKeyDown("w") || Input.GetKey("up")))
             Slide(1);
         
-        if(Input.GetKeyDown("s") || Input.GetKey("down") && attached)
+        if(attached && (Input.GetKeyDown("s") || Input.GetKey("down")))
             Slide(-1);
         
         
-        if(Input.GetKeyDown(KeyCode.Space) && attached)
+        if(attached && Input.GetKeyDown(KeyCode.Space))
             Detach();
     }
 
@@ -84,8 +84,8 @@ public class RopeInteraction : MonoBehaviour
 
     IEnumerator AttachedNull() 
     {
-        
-        yield return new WaitForSeconds(0.5f);
+        //Default attachment cooldown 0.5f
+        yield return new WaitForSeconds(0.1f);
         attachedTo = null;
 
     }
