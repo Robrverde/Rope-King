@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public Rigidbody2D rb;
     [SerializeField] public Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-
+    [SerializeField] private AudioSource JumpSoundEffect;
     
     void Update()
     {
@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetButtonDown("Jump") && IsGrounded())
             {
                 animator.SetBool("isJumping", true);
+                JumpSoundEffect.Play();
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             }
             else if (IsGrounded())
