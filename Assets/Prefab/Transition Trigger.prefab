@@ -83,7 +83,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5155513124949753816}
   m_Layer: 0
-  m_Name: vertical transition
+  m_Name: Transition Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
