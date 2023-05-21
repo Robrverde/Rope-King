@@ -23,6 +23,7 @@ public class PauseMenu : MonoBehaviour
     public void Quit(int sceneId)
     {
         Time.timeScale = 1f;
+        GlobalManager.OnPause = false;
         SceneManager.LoadScene(sceneId);
     }
 }
