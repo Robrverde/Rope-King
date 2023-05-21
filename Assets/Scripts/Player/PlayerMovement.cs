@@ -15,26 +15,36 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    [SerializeField] private AudioSource jumpSoundEffect;
+    [SerializeField] private AudioSource walkSoundEffect;
+    
     
     void Update()
     {
         if(!GlobalManager.OnPause)
         {
             horizontal = Input.GetAxisRaw("Horizontal");
-
+         
             animator.SetFloat("Running", Mathf.Abs(horizontal));
+            if(Mathf.Abs(horizontal)>0.01f)
+            {
+                walkSoundEffect.Play();
+            }
 
             if (Input.GetButtonDown("Jump") && IsGrounded())
             {
                 animator.SetBool("isJumping", true);
+                jumpSoundEffect.Play();
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             }
             else if (IsGrounded())
                 animator.SetBool("isJumping", false);
-
+            
             if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
             {
+                
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+               
             }
 
             Flip();
@@ -44,7 +54,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+       
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        
     }
 
     private bool IsGrounded()
