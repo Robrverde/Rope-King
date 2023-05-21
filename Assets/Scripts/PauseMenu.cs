@@ -11,17 +11,20 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
+        GlobalManager.OnPause = true;
     }
 
     public void Resume()
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
+        GlobalManager.OnPause = false;
     }
 
-    public void Exit(int sceneId)
+    public void Quit(int sceneId)
     {
         Time.timeScale = 1f;
+        GlobalManager.OnPause = false;
         SceneManager.LoadScene(sceneId);
     }
 }

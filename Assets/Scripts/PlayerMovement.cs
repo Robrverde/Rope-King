@@ -15,28 +15,31 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
-    public bool isJumping = false;
-
+    
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-
-        animator.SetFloat("Running", Mathf.Abs(horizontal));
-
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if(!GlobalManager.OnPause)
         {
-            animator.SetBool("isJumping", true);
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-        }
-        else if (IsGrounded())
-            animator.SetBool("isJumping", false);
+            horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
+            animator.SetFloat("Running", Mathf.Abs(horizontal));
 
-        Flip();
+            if (Input.GetButtonDown("Jump") && IsGrounded())
+            {
+                animator.SetBool("isJumping", true);
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            }
+            else if (IsGrounded())
+                animator.SetBool("isJumping", false);
+
+            if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            }
+
+            Flip();
+        }
+        
     }
 
     private void FixedUpdate()
