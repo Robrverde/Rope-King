@@ -14,7 +14,7 @@ public class MovingPlatformControl : MonoBehaviour
        targetPos = posB.position;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(Vector2.Distance(transform.position,posA.position) < .1f)
         { targetPos = posB.position;
