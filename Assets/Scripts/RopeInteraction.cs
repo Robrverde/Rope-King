@@ -38,23 +38,23 @@ public class RopeInteraction : MonoBehaviour
 
     void CheckKeyboardInputs()
     {
-        if(Input.GetKey("a") || Input.GetKey("left"))
+        if(Input.GetKey("a"))
         {
             if(attached)
                 rb.AddRelativeForce(new Vector3(-1, 0, 0) * pushForce);
         }
 
-        if(Input.GetKey("d") || Input.GetKey("right"))
+        if(Input.GetKey("d"))
         {
             if(attached)
                 rb.AddRelativeForce(new Vector3(1, 0, 0) * pushForce);
         }
 
         
-        if(attached && (Input.GetKeyDown("w") || Input.GetKey("up")))
+        if(attached && Input.GetKeyDown("w"))
             Slide(1);
         
-        if(attached && (Input.GetKeyDown("s") || Input.GetKey("down")))
+        if(attached && Input.GetKeyDown("s") )
             Slide(-1);
         
         
@@ -85,7 +85,7 @@ public class RopeInteraction : MonoBehaviour
     IEnumerator AttachedNull() 
     {
         //Default attachment cooldown 0.5f
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(3f);
         attachedTo = null;
 
     }
