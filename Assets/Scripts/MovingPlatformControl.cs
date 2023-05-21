@@ -4,49 +4,50 @@ using UnityEngine;
 
 public class MovingPlatformControl : MonoBehaviour
 {
-    public Transform platform;
-    public Transform startPoint;
-    public Transform endPoint;
-    public float speed = 1.5f;
-    int direction = 1;
-
-
-    private void Update()
+    public Transform posA,posB;
+    public int speed;
+    Vector2 targetPos;
+    
+    
+    void Start()
     {
-        Vector2 target = currentMovementTarget();
+       targetPos = posB.position;
+    }
 
-        platform.position = Vector2.Lerp(platform.position, target, speed*Time.deltaTime);
-
-        float distance = (target - (Vector2)platform.position).magnitude;
-
-        if(distance <= 0.1f)
-        {
-          direction *= -1;
+    void Update()
+    {
+        if(Vector2.Distance(transform.position,posA.position) < .1f)
+        { targetPos = posB.position;
         }
+
+        if(Vector2.Distance(transform.position,posB.position) < .1f) 
+        {targetPos = posA.position;
+        }
+
+        transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+
+
     }
 
-    Vector2 currentMovementTarget()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
-      if(direction == 1)
+      if(collision.CompareTag("Player"))
       {
-          return startPoint.position;
-      }
-      else
-      {
-          return endPoint.position;
-      }
-
+      collision.transform.SetParent(this.transform);
+      }   
     }
+     private void OnTriggerExit2D(Collider2D collision)
+    {
+      if(collision.CompareTag("Player"))
+      {
+      collision.transform.SetParent(null);
+      }
+    }
+
     private void OnDrawGizmos()
     {
-      if(platform != null && startPoint != null && endPoint != null)
-      {
-        Gizmos.DrawLine(platform.transform.position, startPoint.position);
-        Gizmos.DrawLine(platform.transform.position, endPoint.position);
-
-      }  
+      Gizmos.color = Color.green;
+      Gizmos.DrawLine(posA.position,posB.position);
     }
-
 
 }
