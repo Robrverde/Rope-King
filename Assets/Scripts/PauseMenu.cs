@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
+        GlobalManager.OnPause = true;
     }
 
     public void Resume()
