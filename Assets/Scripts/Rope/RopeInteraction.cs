@@ -85,7 +85,7 @@ public class RopeInteraction : MonoBehaviour
     IEnumerator AttachedNull() 
     {
         //Default attachment cooldown 0.5f
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.5f);
         attachedTo = null;
 
     }
